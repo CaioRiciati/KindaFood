@@ -17,7 +17,7 @@
 
     <div class="user-info">
       <span>Olá, <strong th:text="${nomeUsuario}">Usuário</strong>!</span>
-      <button th:unless="${nomeUsuario}" class="login-btn" onclick="window.location.href='/login'">Entrar</button>
+      <button th:unless="${nomeUsuario}" class="login-btn" onclick="window.location.href='login.html'">Entrar</button>
     </div>
   </header>
   
@@ -57,7 +57,7 @@
           <h3>Pizza de Calabresa</h3>
           <p>Molho especial, queijo derretido e calabresa crocante!</p>
           <span class="preco">R$ 34,90</span>
-          <button class="btn-comprar">Adicionar ao carrinho</button>
+          <a href="produto.html" class="btn-comprar">comprar</a>
         </div>
       </div>
             <div class="produto-card">
