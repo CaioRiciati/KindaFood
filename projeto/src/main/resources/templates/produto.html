@@ -1,30 +1,271 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Produto</title>
-    <link rel="stylesheet" href="../static/css/produto.css">
+  <title th:text="${produto.nome} + ' - KindaFood'">Produto - KindaFood</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #fea44f, #be711f);
+      color: #fff;
+      min-height: 100vh;
+    }
+
+    main {
+      background-color: rgb(231, 231, 231);
+      width: 80%;
+      margin: auto;
+      padding: 20px 20px;
+    }
+
+    header {
+      background-color: rgba(255, 102, 0, 0.95);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .logo {
+      font-size: 26px;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    .voltar {
+      background-color: #fff;
+      color: #ff6600;
+      border: none;
+      border-radius: 25px;
+      padding: 10px 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .voltar:hover {
+      background-color: #ff8533;
+      color: #fff;
+    }
+
+    .container {
+      background-color: rgba(179, 179, 179, 0.616);
+      width: 100%;
+      margin:auto;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 60px 5%;
+      gap: 60px;
+      flex-wrap: wrap;
+    }
+
+    .produto-imagem {
+      background-color: #fff;
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      max-width: 450px;
+    }
+
+    .produto-imagem img {
+      width: 100%;
+      border-radius: 15px;
+    }
+
+    .produto-detalhes {
+      background-color: rgb(247, 175, 117);
+      border-radius: 20px;
+      padding: 30px;
+      width: 480px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    .produto-detalhes h2 {
+      font-size: 28px;
+      margin-bottom: 15px;
+      color: #fffbe6;
+    }
+
+    .produto-detalhes p {
+      font-size: 16px;
+      margin-bottom: 20px;
+      color: #fffdf2;
+    }
+
+    .preco {
+      font-size: 26px;
+      font-weight: bold;
+      color: #fffbe6;
+      margin-bottom: 25px;
+    }
+
+    .acoes {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 25px;
+      padding: 14px 25px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .comprar {
+      background-color: #ff6600;
+      color: white;
+    }
+
+    .comprar:hover {
+      background-color: #ff8533;
+    }
+
+    .carrinho {
+      background-color: #fff;
+      color: #ff6600;
+    }
+
+    .carrinho:hover {
+      background-color: #ff8533;
+      color: #fff;
+    }
+
+    /* Produtos relacionados */
+    .relacionados {
+      margin-top: 80px;
+      text-align: center;
+    }
+
+    .relacionados h3 {
+      font-size: 24px;
+      margin-bottom: 30px;
+      color: #fffbe6;
+    }
+
+    .lista-relacionados {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 25px;
+    }
+
+    .card-relacionado {
+      background-color: rgb(255, 103, 33);
+      border-radius: 20px;
+      width: 230px;
+      text-align: center;
+      padding: 15px;
+      transition: transform 0.3s, background 0.3s;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      cursor: pointer;
+    }
+
+    .card-relacionado:hover {
+      transform: scale(1.05);
+      background-color: rgb(255, 133, 85);
+    }
+
+    .card-relacionado img {
+      width: 100%;
+      border-radius: 15px;
+      margin-bottom: 10px;
+    }
+
+    .card-relacionado h4 {
+      color: #fff;
+      font-size: 18px;
+      margin-bottom: 5px;
+    }
+
+    .card-relacionado .preco {
+      font-size: 16px;
+      color: #fffbe6;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      font-size: 14px;
+      opacity: 0.85;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 900px) {
+      .container {
+        flex-direction: column;
+        align-items: center;
+      }
+      .produto-detalhes, .produto-imagem {
+        width: 90%;
+      }
+    }
+
+  </style>
 </head>
 <body>
 
   <header>
-    <div class="logo">KindaFood </div>
-    <a href="home.html" class="voltar">Voltar</a>
+    <div class="logo"> KindaFood</div>
+    <a href="home.html" class="voltar">← Voltar</a>
   </header>
 
-  <div class="container">
-    <div class="produto">
-      <div class="oproduto"><img src="https://via.placeholder.com/300x200.png?text=Produto+1" alt="Produto"></div>
-      <h2>Produto Exemplo</h2>
-      <p>Descrição breve do produto. Aqui você pode colocar detalhes, vantagens e informações relevantes sobre o item.</p>
-      <div class="preco">R$ 99,90</div>
-      <button class="comprar">Comprar Agora</button>
-    </div>
-  </div>
+
+
+  <main>
+    <section class="container">
+      <div class="produto-imagem">
+        <img th:src="${produto.imagemUrl}" alt="Imagem do produto">
+      </div>
+
+      <div class="produto-detalhes">
+        <h2 th:text="${produto.nome}">Nome do Produto</h2>
+        <p th:text="${produto.descricao}">Descrição breve do produto...</p>
+        <div class="preco" th:text="'R$ ' + ${#numbers.formatDecimal(produto.preco, 2, 2)}">R$ 0,00</div>
+
+        <div class="acoes">
+          <button class="btn comprar">Comprar Agora</button>
+          <button class="btn carrinho">Adicionar ao Carrinho</button>
+        </div>
+      </div>
+    </section>
+
+
+
+    <section class="relacionados" th:if="${produtosRelacionados}">
+      <h3 style="color: black;"> Você também pode gostar</h3>
+
+      <div class="lista-relacionados">
+        <div class="card-relacionado"
+             th:each="item : ${produtosRelacionados}"
+             th:onclick="'window.location.href=\'/produto/' + ${item.id} + '\';'">
+
+          <img th:src="${item.imagemUrl}" alt="Produto relacionado">
+          <h4 th:text="${item.nome}">Produto</h4>
+          <div class="preco" th:text="'R$ ' + ${#numbers.formatDecimal(item.preco, 2, 2)}">R$ 00,00</div>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <footer>
-    © 2025 Kindafood - Todos os direitos reservados.
+    © 2025 KindaFood - Todos os direitos reservados.
   </footer>
 
 </body>
